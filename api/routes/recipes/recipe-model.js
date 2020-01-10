@@ -22,12 +22,6 @@ async function removeRecipe(id) {
   .del()
 }
 
-async function removeIngredient(id) {
-  return await db('ingredients')
-  .where({ id })
-  .del()
-}
-
 async function removeShoppingCart(id) {
   return await db('shopping_cart')
   .where({ id })
@@ -40,6 +34,5 @@ module.exports = {
   getRecipeById,
   getShoppingCart,
   removeRecipe,
-  removeIngredient,
   removeShoppingCart
 }

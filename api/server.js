@@ -1,22 +1,22 @@
 const express = require('express')
 const server = express()
-const router = require("./routes")
-const middleware = require("./middleware")
+const middleware = require('./middleware')
+const routes = require('./routes')
 
 server.use(express.json())
-server(middleware)
-server(router)
+middleware(server)
+routes(server)
 
-server.get("/", (req, res) => {
-  res.response("<h2>I am your server. Sanity check complete. Now, leave me alone!</h2>")
+server.get("/", (req, res, next) => {
+  server.send("<h2>I am your server and I have life!</h2>")
 })
 
 server.use((req, res, next) => {
-  res.status(404).json({ message: "We have followed the fork in the path, but chose the wrong direction. Turn back!"})
+  res.status(404).json({ message: "Well, you juked when you should have jived."})
 })
 
 server.use((err, req, res, next) => {
-  res.status(500).json({ message: "The server has failed you. Please allow us to make it up to you."})
+  res.status(500).json({ message: "Life as we know it has ended, but in reality the server malfunctioned and you are okay."})
 })
 
-module.exports = server;
+module.exports = server
